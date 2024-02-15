@@ -1,4 +1,55 @@
 .pokemon-card {
     height: 100px;
+}
 
+@media (min-width:768px) {
+    .pokemon-info {
+        /* display: block;
+        position: fixed; */
+    }
+}
+
+
+
+.pokemon-sprites img {
+    margin-top: -70px;
+    height: 100px;
+
+}
+
+.pokemon-info-sprites img {
+    margin-top: -150px;
+}
+
+.tab {
+    display: none;
+}
+
+.tab-active {
+    display: block;
+}
+
+.tab-a {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.active-a {
+    /* background-color: #ccc; */
+    border-radius: 0;
+    border-bottom: 2px solid #ccc;
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 10px !important;
 }
