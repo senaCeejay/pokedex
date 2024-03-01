@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { PokemonAPI } from '../configs/axios'
-import * as LR from "lucide-react"
-import Button from './Button';
 const PokemonInfo = ({ selectedPokemon }) => {
     // Use the selectedPokemon to display information
 
@@ -74,16 +72,25 @@ const PokemonInfo = ({ selectedPokemon }) => {
         steel: "text-slate-900",
         fairy: "text-pink-900",
     }
+    const pokemonDropShadow = {
+        // drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)]
+        normal: "drop-shadow-[3px_3px_10px_rgba(200,0,0,0.3)]",
+        fire: "drop-shadow-[3px_3px_10px_rgba(200,0,0,0.3)]",
+        water: "drop-shadow-[3px_3px_10px_rgba(0,0,255,0.3)]",
+        grass: "drop-shadow-[3px_3px_10px_rgba(0,200,0,0.3)]",
+        bug: "drop-shadow-[3px_3px_10px_rgba(200,0,0,0.3)]",
+    }
     return (
         <>
             {selectedPokemon ? (
-                <div className='shadow-lg md:p-5 mx-5 md:mt-28 lg:mt-32 rounded-t-2xl md:rounded-2xl bg-white'>
-                    <div className='flex items-center justify-center pokemon-info-sprites'>
+                <div className='shadow-lg md:p-5 md:mx-5 md:mt-28 lg:mt-32 rounded-t-2xl md:rounded-2xl bg-white'>
+                    <div className='flex flex-col items-center justify-center pokemon-info-sprites'>
                         {
                             sprite[spriteIndex]
                                 ? (
                                     // <img src={sprite[spriteIndex]} alt="" style={{ height: '200px' }} />
-                                    <img src={`https://img.pokemondb.net/sprites/home/normal/${selectedPokemon.name}.png`} alt="" />
+                                    // <img src={`https://img.pokemondb.net/sprites/home/normal/${selectedPokemon.name}.png`} alt="" className='pokemon-image' />
+                                    <img src={`https://img.pokemondb.net/sprites/home/normal/${selectedPokemon.name}.png`} alt="" className={`pokemon-image ${pokemonDropShadow[myPokemon.types[0].type.name]}`} />
                                 )
                                 : (
                                     <div>
@@ -92,7 +99,7 @@ const PokemonInfo = ({ selectedPokemon }) => {
                                 )
                         }
                     </div>
-                    <div className='text-center flex flex-col gap-2'>
+                    <div className='text-center flex flex-col gap-2 mt-2'>
                         <h2 className='font-bold text-2xl capitalize'>{selectedPokemon.name}</h2>
                         {/* {myPokemon && myPokemon.types && myPokemon.types.map((val, index) => (
                             <p key={index}>
@@ -102,12 +109,12 @@ const PokemonInfo = ({ selectedPokemon }) => {
                         <div className='flex gap-2 justify-center font-bold uppercase'>
                             {myPokemon.types && myPokemon.types.length > 0 && (
                                 <div className={`p-2 ${typeColor[myPokemon.types[0].type.name]} ${textTypeColor[myPokemon.types[0].type.name]} rounded-lg`}>
-                                    <p>{myPokemon.types[0].type.name}</p>
+                                    <p className='text-sm'>{myPokemon.types[0].type.name}</p>
                                 </div>
                             )}
                             {myPokemon.types && myPokemon.types.length > 1 && (
                                 <div className={`p-2 ${typeColor[myPokemon.types[1].type.name]} ${textTypeColor[myPokemon.types[1].type.name]} rounded-lg`}>
-                                    <p>{myPokemon.types[1].type.name}</p>
+                                    <p className='text-sm'>{myPokemon.types[1].type.name}</p>
                                 </div>
                             )}
                         </div>
@@ -115,18 +122,41 @@ const PokemonInfo = ({ selectedPokemon }) => {
                         <p>Height: {myPokemon.height}</p>
                         <p>Base Experience: {myPokemon.base_experience}</p> */}
                     </div>
-                    <div>
-                        <div className={`tab-a ${activeTab === "1" ? 'active-a' : ''}`} data-id="1" onClick={() => handleClick("1")}>
-                            Tab 1
-                        </div>
-                        <div className={`tab-a ${activeTab === "2" ? 'active-a' : ''}`} data-id="2" onClick={() => handleClick("2")}>
-                            Tab 2
-                        </div>
-                        <div className={`tab-a ${activeTab === "3" ? 'active-a' : ''}`} data-id="3" onClick={() => handleClick("3")}>
-                            Tab 3
+                    <div >
+                        <div className='font-semibold '>
+                            {/* <div className='flex w-56 overflow-scroll text-nowrap'> */}
+                            <div className={`tab-a ${activeTab === "1" ? 'active-a' : ''}`} data-id="1" onClick={() => handleClick("1")}>
+                                Data
+                            </div>
+                            <div className={`tab-a ${activeTab === "2" ? 'active-a' : ''}`} data-id="2" onClick={() => handleClick("2")}>
+                                Moves
+                            </div>
+                            <div className={`tab-a ${activeTab === "3" ? 'active-a' : ''}`} data-id="3" onClick={() => handleClick("3")}>
+                                Tab 3
+                            </div>
+                            {/* </div> */}
                         </div>
                         <div className={`tab ${activeTab === "1" ? 'tab-active px-2' : ''}`} data-id="1">
-                            Content for Tab 1
+                            <div className='flex gap-2 justify-center'>
+                                <div className='flex flex-col gap-2 justify-center text-center w-full font-bold'>
+                                    <h1 className='text-md font-bold uppercase'>height</h1>
+                                    <h1 className='text-md p-2 bg-slate-100 rounded-full font-semibold'> {(myPokemon.height / 10).toFixed(1)}m</h1>
+                                </div>
+                                <div className='flex flex-col gap-2 justify-center text-center w-full font-bold'>
+                                    <h1 className='text-md font-bold uppercase'>weight</h1>
+                                    <h1 className='text-md p-2 bg-slate-100 rounded-full font-semibold'>{(myPokemon.weight / 10).toFixed(1)}kg</h1>
+                                </div>
+                            </div>
+                            <div className='flex gap-2 justify-center '>
+                                <div className='flex flex-col gap-2 justify-center text-center w-full font-bold'>
+                                    <h1 className='text-md font-bold uppercase'>weaknesses</h1>
+                                    <h1 className='text-md p-2 bg-slate-100 rounded-full font-semibold'>NA</h1>
+                                </div>
+                                <div className='flex flex-col gap-2 justify-center text-center w-full font-bold'>
+                                    <h1 className='text-md font-bold uppercase'>Base Exp</h1>
+                                    <h1 className='text-md p-2 bg-slate-100 rounded-full font-semibold'>{myPokemon.base_experience}</h1>
+                                </div>
+                            </div>
                         </div>
                         <div className={`tab ${activeTab === "2" ? 'tab-active px-2' : ''}`} data-id="2">
                             Content for Tab 2
@@ -139,7 +169,16 @@ const PokemonInfo = ({ selectedPokemon }) => {
                 </div >
 
             ) : (
-                <p>No Pokemon selected</p>
+                <div className='shadow-lg md:p-5 mx-5 md:mt-28 lg:mt-32 rounded-t-2xl md:rounded-2xl bg-white'>
+                    <div className='flex items-center justify-center '>
+                        <p>No Pokemon selected</p>
+                    </div>
+                    {/* <div className='text-center flex flex-col gap-2'>
+                        <div className='flex gap-2 justify-center font-bold uppercase'>
+
+                        </div>
+                    </div> */}
+                </div >
             )}
         </>
     );

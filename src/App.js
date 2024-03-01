@@ -71,9 +71,16 @@ function App() {
                                 })}
                         </div>
                     </div>
-                    <div className='top-20 lg:top-0 right-10 lg:right-4 xl:right-12 hidden md:flex md:fixed pokemon-info'>
-                        <PokemonInfo selectedPokemon={selectedPokemon} />
-                    </div>
+
+                    {selectedPokemon === null ?
+                        <div className='top-20 lg:top-0 right-10 lg:right-4 xl:right-24 hidden md:flex md:fixed pokemon-info'>
+                            <PokemonInfo selectedPokemon={selectedPokemon} />
+                        </div>
+                        :
+                        <div className='top-20 lg:top-0 right-10 lg:right-4 xl:right-12 hidden md:flex md:fixed pokemon-info'>
+                            <PokemonInfo selectedPokemon={selectedPokemon} />
+                        </div>
+                    }
                 </div>
                 {showCard &&
                     <>
